@@ -1,0 +1,31 @@
+{% extends 'booking/base.html' %}
+{% block title %}Receptionist Panel{% endblock %}
+{% block content %}
+<h2>Receptionist Panel</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Slot Time</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for slot in slots %}
+        <tr>
+            <td>{{ slot.time }}</td>
+            <td>{{ 'Booked' if slot.is_booked else 'Available' }}</td>
+            <td>
+                {% if not slot.is_booked %}
+                <form method="POST" action="{% url 'book_slot' slot.id %}">
+                    {% csrf_token %}
+                    <input type="text" name="patient_name" placeholder="Patient Name" required>
+                    <button type="submit">Book</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

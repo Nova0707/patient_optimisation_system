@@ -1,0 +1,15 @@
+{% extends 'booking/base.html' %}
+{% block title %}Add Shift{% endblock %}
+{% block content %}
+<h2>Add Shift</h2>
+<form method="POST">
+    {% csrf_token %}
+    <label>Start Time:</label>
+    <input type="time" name="start_time" required>
+    <label>End Time:</label>
+    <input type="time" name="end_time" required>
+    <label>Interval (minutes):</label>
+    <input type="number" name="interval" required>
+    <button type="submit">Add Shift</button>
+</form>
+{% endblock %}
